@@ -6,6 +6,8 @@ using Sirenix.OdinInspector;
 
 public class WorldCardGrid : MonoBehaviour
 {
+    private GameManager gameManager;
+
     [Header("Card Setup")]
     public GameObject cardPrefab;
     public CardDataManager cardDataManager;
@@ -55,11 +57,16 @@ public class WorldCardGrid : MonoBehaviour
 
     void Start()
     {
+        gameManager = GetComponent<GameManager>();
+        
         cardTurnHandler = GetComponent<CardTurnHandler>();
 
         // Spawn player and enemy grids concurrently with delays.
-        StartCoroutine(SpawnGrid(playerGridStartPosition, playerCards, true));
-        StartCoroutine(SpawnGrid(enemyGridStartPosition, enemyCards, false));
+        if (gameManager.isFighting)
+        {
+            StartCoroutine(SpawnGrid(playerGridStartPosition, playerCards, true));
+            StartCoroutine(SpawnGrid(enemyGridStartPosition, enemyCards, false));
+        }
     }
 
     /// <summary>
