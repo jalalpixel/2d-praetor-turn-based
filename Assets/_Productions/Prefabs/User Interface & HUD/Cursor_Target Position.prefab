@@ -128,5 +128,3 @@ MonoBehaviour:
   isCalledByAnimator: 0
   isDespawnByNonActivateObject: 0
   isDestroyingObject: 0
-  isDestroyNearPlayer: 1
-  destroyRadius: 0.1

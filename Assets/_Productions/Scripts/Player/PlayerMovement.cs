@@ -75,15 +75,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (moveByClick)
         {
-            // Move towards click target
-            Vector2 newPos = Vector2.MoveTowards(rb.position, clickTarget, moveSpeed * Time.fixedDeltaTime);
             Vector2 dir = (clickTarget - rb.position).normalized;
-
-            rb.MovePosition(newPos);
+            rb.linearVelocity = dir * moveSpeed;
 
             // Stop if close enough
             if (Vector2.Distance(rb.position, clickTarget) < 0.05f)
             {
+                rb.linearVelocity = Vector2.zero;
                 moveByClick = false;
                 DespawnIndicator();
             }
@@ -96,8 +94,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            // WASD movement
-            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+            rb.linearVelocity = movement * moveSpeed;
         }
     }
 
