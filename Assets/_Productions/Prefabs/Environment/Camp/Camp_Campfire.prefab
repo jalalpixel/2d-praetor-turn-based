@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8123036241308867780}
   m_Layer: 0
   m_Name: Camp_Campfire
-  m_TagString: Untagged
+  m_TagString: Basecamp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
