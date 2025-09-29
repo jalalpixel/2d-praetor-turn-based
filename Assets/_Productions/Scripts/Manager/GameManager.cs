@@ -9,4 +9,6 @@ public class GameManager : MonoBehaviour
         isFighting = false;
     }
     
+
+
 }

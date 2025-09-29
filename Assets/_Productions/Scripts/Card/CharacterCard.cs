@@ -12,6 +12,7 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     [Header("Character Data")]
     public CharacterData characterData;
     public SpriteRenderer frameSpriteRenderer;
+    public Animator anim;
 
     [Header("Damaged Variable")]
     public DamagedPopUpText damagedPopTextPrefab;
@@ -29,10 +30,10 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     private int damage;
 
     public Transform cardHead;
-    public ParticleSystem hoveredParticlesSystem;
     public bool isSelected;
     public bool isPlayer = true;
     private bool isHovered;
+    [SerializeField] private GameObject hoveredIndicator;
 
     public void SetupCard()
     {
@@ -40,7 +41,7 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         characterCardEffect = GetComponent<CharacterCardEffect>();
         initMaterial = frameSpriteRenderer.material;
         StartCoroutine(SetupCardIsPlaced());
-        TurnOffParticleSystem(true);
+        hoveredIndicator.SetActive(isSelected);
 
         if (characterData != null)
         {
@@ -48,7 +49,7 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
             armor = characterData.armor;
             agility = characterData.agility;
             damage = characterData.damage;
-            frameSpriteRenderer.sprite = characterData.characterSprite;
+            anim = characterData.characterAnimator;
         }
         else
         {
@@ -104,14 +105,14 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         {
             characterCardEffect.SetBiggerCardSize();
             characterCardEffect.borderCardFrameImage.SetActive(true);
-            TurnOffParticleSystem(false);
+            hoveredIndicator.SetActive(isSelected);
             SetCardStatsHUD();
         }
         else if (!isSelected) // Only reset when not selected
         {
             characterCardEffect.ResetSizeCard();
             characterCardEffect.borderCardFrameImage.SetActive(false);
-            TurnOffParticleSystem(true);
+            hoveredIndicator.SetActive(isSelected);
 
             if (isPlayer)
             {
@@ -141,13 +142,7 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         isSelected = false;
         characterCardEffect.ResetSizeCard();
         characterCardEffect.borderCardFrameImage.SetActive(false);
-        TurnOffParticleSystem(true);
-    }
-
-    private void TurnOffParticleSystem(bool turnOff)
-    {
-        var emission = hoveredParticlesSystem.emission;
-        emission.rateOverTime = turnOff ? 0f : 30f;
+        hoveredIndicator.SetActive(isSelected);
     }
 
     public void Attack(CharacterCard target)

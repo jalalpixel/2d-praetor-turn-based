@@ -4,6 +4,8 @@ using Lean.Pool;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    public GameManager gameManager;
+
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private GameObject moveIndicatorPrefab;
@@ -22,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody2D>();
 
         if (animator == null)
@@ -47,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         // --- Mouse Click movement ---
         if (Input.GetMouseButtonDown(0)) // left click
         {
+            if (gameManager.isFighting) return;
             Vector3 worldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             worldPos.z = 0f;
             clickTarget = new Vector2(worldPos.x, worldPos.y);
