@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        isFighting = false;
+       
     }
     
 

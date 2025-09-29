@@ -33,15 +33,14 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     public bool isSelected;
     public bool isPlayer = true;
     private bool isHovered;
-    [SerializeField] private GameObject hoveredIndicator;
+    public GameObject hoveredIndicator;
 
     public void SetupCard()
     {
         cardStatsHUDManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<CardStatsHUDManager>();
         characterCardEffect = GetComponent<CharacterCardEffect>();
         initMaterial = frameSpriteRenderer.material;
-        StartCoroutine(SetupCardIsPlaced());
-        hoveredIndicator.SetActive(isSelected);
+        characterCardEffect.CardSelectedIndicator(false);
 
         if (characterData != null)
         {
@@ -49,7 +48,7 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
             armor = characterData.armor;
             agility = characterData.agility;
             damage = characterData.damage;
-            anim = characterData.characterAnimator;
+            anim.runtimeAnimatorController = characterData.characterAnimator;
         }
         else
         {
@@ -57,25 +56,31 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         }
     }
 
-    IEnumerator SetupCardIsPlaced()
-    {
-        yield return new WaitForSeconds(.4f);
-        characterCardEffect.isPlaced = true;
-    }
-
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left && isPlayer)
         {
-            worldCardGrid.SetupSelectedCard(this);
-            SetCardStatsHUD();
+            if(isSelected == false)
+            {
+                worldCardGrid.SetupSelectedCharacter(this);
+                characterCardEffect.CardSelectedIndicator(true);
+                SetCardStatsHUD();
+                SelectingCard(true);
+            }
+            else
+            {
+                DeselectCard();
+            }
             Debug.Log("Object selected!");
         }
 
         if(eventData.button == PointerEventData.InputButton.Left && isPlayer == false)
         {
-            if (worldCardGrid.selectedCard == null) return;
-            TakeDamage(worldCardGrid.selectedCard.characterData.damage);
+            if (worldCardGrid.selectedCharacter == null) return;
+            SelectingCard(false);
+            TakeDamage(worldCardGrid.selectedCharacter.characterData.damage);
+
+            worldCardGrid.selectedCharacter.DeselectCard();
         }
     }
 
@@ -85,6 +90,8 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         {
             isHovered = true;
             SelectingCard(true);
+            characterCardEffect.CardSelectedIndicator(true);
+            Debug.Log("Is Hovered!");
         }
     }
 
@@ -94,26 +101,23 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         {
             isHovered = false;
             SelectingCard(false);
+            Debug.Log("Is Not Hovered!");
+        }
+
+        if (isSelected == false)
+        {
+            characterCardEffect.CardSelectedIndicator(false);
         }
     }
 
     public void SelectingCard(bool isSelecting)
     {
-        if (!characterCardEffect.isPlaced) return;
-
         if (isSelecting)
         {
-            characterCardEffect.SetBiggerCardSize();
-            characterCardEffect.borderCardFrameImage.SetActive(true);
-            hoveredIndicator.SetActive(isSelected);
             SetCardStatsHUD();
         }
         else if (!isSelected) // Only reset when not selected
         {
-            characterCardEffect.ResetSizeCard();
-            characterCardEffect.borderCardFrameImage.SetActive(false);
-            hoveredIndicator.SetActive(isSelected);
-
             if (isPlayer)
             {
                 cardStatsHUDManager.PlayerCardUnhovered();
@@ -140,9 +144,8 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     public void DeselectCard()
     {
         isSelected = false;
-        characterCardEffect.ResetSizeCard();
         characterCardEffect.borderCardFrameImage.SetActive(false);
-        hoveredIndicator.SetActive(isSelected);
+        characterCardEffect.CardSelectedIndicator(false);
     }
 
     public void Attack(CharacterCard target)
@@ -188,11 +191,11 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         {
             if (isPlayer)
             {
-                worldCardGrid.playerCards[gridIndex] = null;
+                worldCardGrid.playerCharacters[gridIndex] = null;
             }
             else
             {
-                worldCardGrid.enemyCards[gridIndex] = null;
+                worldCardGrid.enemyCharacters[gridIndex] = null;
             }
 
             characterCardEffect.PopAndDespawn();

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterName: Doctor
   classType: 4
-  characterSprite: {fileID: 21300000, guid: 8a41e25ff7a05c244b174bf1cafc0f3e, type: 3}
-  maxHealth: 4
+  characterAnimator: {fileID: 0}
+  maxHealth: 70
   armor: 1
   agility: 0.01
   damage: 20

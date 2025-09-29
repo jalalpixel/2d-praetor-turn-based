@@ -5,21 +5,10 @@ using UnityEngine.EventSystems;
 
 public class CharacterCardEffect : MonoBehaviour
 {
-    [Header("Placement Settings")]
-    public bool isPlaced = false;
-    public Rigidbody2D cardRigidbody2D;
+    private CharacterCard characterCard;
 
-    [Header("Wiggle Settings")]
-    [Tooltip("Maximum rotation angle in degrees.")]
-    public float wiggleAmplitude = 4f;
-    [Tooltip("Current wiggle speed (frequency).")]
-    public float wiggleFrequency = 2f;
-    [Tooltip("Minimum wiggle speed (frequency).")]
-    public float wiggleMinFrequency = 1f;
-    [Tooltip("Maximum wiggle speed (frequency).")]
-    public float wiggleMaxFrequency = 3f;
-    [Tooltip("Time interval (in seconds) to randomize the wiggle speed.")]
-    public float wiggleRandomizeInterval = 2f;
+    [Header("Placement Settings")]
+    public Rigidbody2D cardRigidbody2D;
 
     [Header("Hover Settings")]
     [Tooltip("Factor by which the X-scale increases on hover.")]
@@ -43,6 +32,8 @@ public class CharacterCardEffect : MonoBehaviour
 
     void OnEnable()
     {
+        characterCard = GetComponent<CharacterCard>();
+
         borderCardFrameImage.SetActive(false);
         initialcardFramePosition = cardFrameSpriteRenderer.transform.localPosition;
         initialScale = cardFrameSpriteRenderer.transform.localScale;
@@ -53,54 +44,12 @@ public class CharacterCardEffect : MonoBehaviour
             cardRigidbody2D.linearVelocity = Vector2.zero;
         }
 
-        // Optionally randomize the initial wiggle amplitude.
-        wiggleAmplitude = Random.Range(2f, 6f);
-
-        // Start the coroutine that will randomize the wiggle frequency.
-        wiggleRoutine = StartCoroutine(RandomizeWiggleSpeed());
     }
 
     void Update()
     {
-        if (isPlaced && !isPopping)
-        {
-            // Calculate rotation angle using a sine wave.
-            float angle = Mathf.Sin(Time.time * wiggleFrequency * Mathf.PI * 2) * wiggleAmplitude;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-        }
-    }
 
-    private IEnumerator RandomizeWiggleSpeed()
-    {
-        while (!isPopping)
-        {
-            float targetFrequency = Random.Range(wiggleMinFrequency, wiggleMaxFrequency);
-            float startFrequency = wiggleFrequency;
-            float elapsed = 0f;
-
-            while (elapsed < wiggleRandomizeInterval)
-            {
-                wiggleFrequency = Mathf.Lerp(startFrequency, targetFrequency, elapsed / wiggleRandomizeInterval);
-                elapsed += Time.deltaTime;
-                yield return null;
-            }
-            wiggleFrequency = targetFrequency;
-        }
-    }
-    
-    public void SetBiggerCardSize()
-    {
-        cardFrameSpriteRenderer.transform.localScale = new Vector3(initialScale.x * hoverScaleFactor, initialScale.y * hoverScaleFactor, initialScale.z);
-        cardFrameSpriteRenderer.transform.localPosition = new Vector2(cardFrameSpriteRenderer.transform.localPosition.x, cardFrameSpriteRenderer.transform.localPosition.y + 0.15f);
-    }
-
-
-    public void ResetSizeCard()
-    {
-        cardFrameSpriteRenderer.transform.localScale = initialScale;
-        cardFrameSpriteRenderer.transform.localPosition = initialcardFramePosition;
-    }
-
+    }        
 
     public void PopAndDespawn()
     {
@@ -125,6 +74,12 @@ public class CharacterCardEffect : MonoBehaviour
         }
 
         Invoke(nameof(Despawn), despawnDelay);
+    }
+
+    public void CardSelectedIndicator(bool isSelected)
+    {
+        characterCard.hoveredIndicator.SetActive(isSelected);
+        Debug.Log("Called");
     }
 
     private void OnDisable()

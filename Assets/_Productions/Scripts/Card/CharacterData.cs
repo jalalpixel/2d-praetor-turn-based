@@ -16,7 +16,7 @@ public class CharacterData : ScriptableObject
         ranger
     }
 
-    public Animator characterAnimator;
+    public RuntimeAnimatorController characterAnimator;
     public int maxHealth = 100;
     public int armor = 10;           // Flat damage reduction
     [Range(0.001f, 1f)]

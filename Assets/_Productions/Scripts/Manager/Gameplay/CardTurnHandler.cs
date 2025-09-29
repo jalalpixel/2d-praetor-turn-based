@@ -33,7 +33,7 @@ public class CardTurnHandler : MonoBehaviour
 
     public void SetupPlayerTurn()
     {
-        foreach (var card in worldCardGrid.playerCards)
+        foreach (var card in worldCardGrid.playerCharacters)
         {
             CharacterCard characterCard = card?.GetComponent<CharacterCard>();
             if (characterCard == null) continue; // Skip if null
@@ -56,7 +56,7 @@ public class CardTurnHandler : MonoBehaviour
 
     public void SetupEnemiesTurn()
     {
-        foreach (var card in worldCardGrid.enemyCards)
+        foreach (var card in worldCardGrid.enemyCharacters)
         {
             CharacterCard characterCard = card?.GetComponent<CharacterCard>();
             if (characterCard == null) continue; // Skip if null

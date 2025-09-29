@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28c42bd330c17fa42b3bc7edc58e6393, type: 3}
-  m_Name: Dual
+  m_Name: Miners
   m_EditorClassIdentifier: 
-  CharacterName: Dual Blade
+  CharacterName: Miners
   classType: 0
-  characterAnimator: {fileID: 9100000, guid: cad146522d71cf743833d80437d583c1, type: 2}
-  maxHealth: 100
-  armor: 10
+  characterAnimator: {fileID: 9100000, guid: d44592824daa3e24493b283e831d00f9, type: 2}
+  maxHealth: 70
+  armor: 3
   agility: 0.015
-  damage: 17
+  damage: 11
   attackHitAmount: 2

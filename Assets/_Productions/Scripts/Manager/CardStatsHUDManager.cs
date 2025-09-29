@@ -38,14 +38,14 @@ public class CardStatsHUDManager : MonoBehaviour
             cooldownHoverStatsPlayer -= Time.deltaTime;
             if(cooldownHoverStatsPlayer < 0)
             {
-                if(worldCardGrid.selectedCard == null)
+                if(worldCardGrid.selectedCharacter == null)
                 {
                     canvasGroupPlayer.alpha = 0f;
                     characterNameTextPlayer.SetText(" ");
                 }
                 else
                 {
-                    SetupPlayerStats(worldCardGrid.selectedCard.characterData);
+                    SetupPlayerStats(worldCardGrid.selectedCharacter.characterData);
                 }
             }
         }
@@ -55,7 +55,7 @@ public class CardStatsHUDManager : MonoBehaviour
             cooldownHoverStatsEnemies -= Time.deltaTime;
             if(cooldownHoverStatsEnemies < 0)
             {
-                if(worldCardGrid.selectedCard == null)
+                if(worldCardGrid.selectedCharacter == null)
                 {
                     canvasGroupEnemies.alpha = 0f;
                     characterNameTextEnemies.SetText(" ");
