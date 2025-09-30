@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5361649733028370076}
   - component: {fileID: 7411728441928490996}
   m_Layer: 0
-  m_Name: Camp
+  m_Name: Buildings
   m_TagString: Basecamp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
