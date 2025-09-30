@@ -58,6 +58,8 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (worldCardGrid.cardTurnHandler.playerTurnAmount < 1) return;
+
         if (eventData.button == PointerEventData.InputButton.Left && isPlayer)
         {
             if(isSelected == false)
