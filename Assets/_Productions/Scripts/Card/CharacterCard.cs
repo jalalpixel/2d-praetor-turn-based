@@ -78,7 +78,7 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         {
             if (worldCardGrid.selectedCharacter == null) return;
             SelectingCard(false);
-            TakeDamage(worldCardGrid.selectedCharacter.characterData.damage);
+            worldCardGrid.selectedCharacter.Attack(this);
 
             worldCardGrid.selectedCharacter.DeselectCard();
         }
@@ -144,13 +144,78 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     public void DeselectCard()
     {
         isSelected = false;
+        worldCardGrid.selectedCharacter = null;
         characterCardEffect.borderCardFrameImage.SetActive(false);
         characterCardEffect.CardSelectedIndicator(false);
     }
 
     public void Attack(CharacterCard target)
     {
+        StartCoroutine(AttackRoutine(target));
+        Debug.Log(target);
+    }
+
+    private IEnumerator AttackRoutine(CharacterCard target)
+    {
+        if (target == null) yield break;
+
+        // Save original position
+        Vector3 startPos = transform.position;
+
+        // Step 1: Move toward target
+        Vector3 targetPos = target.transform.position + (transform.position - target.transform.position).normalized * 0.1f; // stop near target
+        anim.SetFloat("MoveSpeed", 1.1f); // running animation
+        while (Vector3.Distance(transform.position, targetPos) > 0.0015f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, 2f * Time.deltaTime);
+            if(target.transform.position.x < transform.position.x)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = Vector3.one;
+            }
+            yield return null;
+        }
+        anim.SetFloat("MoveSpeed", 0f);
+
+        // Step 2: Randomize attack type
+        int attackType = Random.Range(1, 3); // 1 or 2
+
+        // Step 3: Play attack animation
+        anim.Play("Attack" + attackType);
+
+        // Wait a bit before slash
+        yield return new WaitForSeconds(0.5f);
+
+        // Step 4: Play slash animation
+        anim.Play("Attack" + attackType + "_Slash");
+
+        // Deal damage
         target.TakeDamage(damage);
+
+        // Wait until slash animation ends
+        yield return new WaitForSeconds(0.3f);
+
+        // Step 5: Move back to original position
+        anim.SetFloat("MoveSpeed", 1.1f);
+        while (Vector3.Distance(transform.position, startPos) > 0.05f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, startPos, 5f * Time.deltaTime); 
+            if (startPos.x < transform.position.x)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = Vector3.one;
+            }
+            yield return null;
+        }
+        anim.SetFloat("MoveSpeed", 0f);
+        anim.SetTrigger("Idle");
+        transform.localScale = Vector3.one;
     }
 
     public void TakeDamage(int incomingDamage)
