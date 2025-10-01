@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 2248872311519408871}
   - component: {fileID: 4673851483789106297}
   m_Layer: 0
-  m_Name: HUD Status Frame
+  m_Name: HUD_Status Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

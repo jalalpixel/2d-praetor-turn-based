@@ -10,7 +10,9 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     public int gridIndex;
 
     [Header("Character Data")]
-    public CharacterData characterData;
+    public CharacterData characterData; 
+    public RuntimeCharacterData initCharData;   // Untouched original copy
+    public RuntimeCharacterData runtimeCharData; // Modifiable runtime copy
     public SpriteRenderer frameSpriteRenderer;
     public Animator anim;
 
@@ -25,15 +27,37 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     public int currentHealth;
 
     // Local copies of stats for easy reference
-    private int armor;
-    private float agility;
-    private int damage;
+    public int armor;
+    public float agility;
+    public int damage;
 
     public Transform cardHead;
     public bool isSelected;
     public bool isPlayer = true;
     private bool isHovered;
     public GameObject hoveredIndicator;
+    
+    [System.Serializable]
+    public class RuntimeCharacterData
+    {
+        public string characterName;
+        public int maxHealth;
+        public int armor;
+        public float agility;
+        public int damage;
+        public RuntimeAnimatorController characterAnimator;
+
+        public RuntimeCharacterData(CharacterData baseData)
+        {
+            characterName = baseData.characterName;
+            maxHealth = baseData.maxHealth;
+            armor = baseData.armor;
+            agility = baseData.agility;
+            damage = baseData.damage;
+            characterAnimator = baseData.characterAnimator;
+        }
+    }
+
 
     public void SetupCard()
     {
@@ -44,17 +68,22 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
         if (characterData != null)
         {
-            currentHealth = characterData.maxHealth;
-            armor = characterData.armor;
-            agility = characterData.agility;
-            damage = characterData.damage;
-            anim.runtimeAnimatorController = characterData.characterAnimator;
+            // Clone two copies: original snapshot & runtime working copy
+            initCharData = new RuntimeCharacterData(characterData);
+            runtimeCharData = new RuntimeCharacterData(characterData);
+
+            currentHealth = runtimeCharData.maxHealth;
+            armor = runtimeCharData.armor;
+            agility = runtimeCharData.agility;
+            damage = runtimeCharData.damage;
+            anim.runtimeAnimatorController = runtimeCharData.characterAnimator;
         }
         else
         {
             Debug.LogError($"{name} has no CharacterData assigned!");
         }
     }
+
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -120,27 +149,13 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         }
         else if (!isSelected) // Only reset when not selected
         {
-            if (isPlayer)
-            {
-                cardStatsHUDManager.PlayerCardUnhovered();
-            }
-            else
-            {
-                cardStatsHUDManager.EnemiesCardUnhovered();
-            }
+            cardStatsHUDManager.PlayerCardUnhovered();            
         }
     }
 
     private void SetCardStatsHUD()
     {
-        if (isPlayer)
-        {
-            cardStatsHUDManager.SetupPlayerStats(characterData);
-        }
-        else
-        {
-            cardStatsHUDManager.SetupEnemiesStats(characterData);
-        }
+        cardStatsHUDManager.SetupPlayerStats(this, this.transform);
     }
 
     public void DeselectCard()
@@ -244,8 +259,9 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         LeanPool.Spawn(characterCardEffect.explosionEffectPrefab, transform.position, Quaternion.identity);
 
 
-        int effectiveDamage = Mathf.Max(incomingDamage - armor, 1);
+        int effectiveDamage = Mathf.Max(incomingDamage - runtimeCharData.armor, 1);
         currentHealth -= effectiveDamage;
+
         damagePopUp.SetupText(effectiveDamage.ToString());
 
         for (int i = 0; i < effectiveDamage; i++)

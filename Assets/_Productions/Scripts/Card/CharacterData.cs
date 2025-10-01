@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Character Data", menuName = "Game/Character Data")]
 public class CharacterData : ScriptableObject
 {
-    public string CharacterName;
+    public string characterName;
     public ClassType classType;
     public enum ClassType
     {

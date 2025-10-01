@@ -7,24 +7,14 @@ public class CardStatsHUDManager : MonoBehaviour
     private WorldCardGrid worldCardGrid;
 
     [Header("Player Stats")]
-    public CanvasGroup canvasGroupPlayer;
-    public TextMeshProUGUI characterNameTextPlayer;
-    public TextMeshProUGUI healthTextPlayer;
-    public TextMeshProUGUI damageTextPlayer;
-    public TextMeshProUGUI armorTextPlayer;
-    public TextMeshProUGUI agilityTextPlayer;
-    public float cooldownHoverStatsPlayer;
-    public bool notHoverPlayer;
-
-    [Header("Enemies Stats")]
-    public CanvasGroup canvasGroupEnemies;
-    public TextMeshProUGUI characterNameTextEnemies;
-    public TextMeshProUGUI healthTextEnemies;
-    public TextMeshProUGUI damageTextEnemies;
-    public TextMeshProUGUI armorTextEnemies;
-    public TextMeshProUGUI agilityTextEnemies;
-    public float cooldownHoverStatsEnemies;
-    public bool notHoverEnemies;
+    public CanvasGroup canvasGroupStats;
+    public TextMeshProUGUI characterNameText;
+    public TextMeshProUGUI healthText;
+    public TextMeshProUGUI damageText;
+    public TextMeshProUGUI armorText;
+    public TextMeshProUGUI agilityText;
+    public float cooldownHoverStats;
+    public bool notHovering;
 
     private void OnEnable()
     {
@@ -33,71 +23,39 @@ public class CardStatsHUDManager : MonoBehaviour
 
     private void Update()
     {
-        if (notHoverPlayer && cooldownHoverStatsPlayer >= 0)
+        if (notHovering && cooldownHoverStats >= 0)
         {
-            cooldownHoverStatsPlayer -= Time.deltaTime;
-            if(cooldownHoverStatsPlayer < 0)
+            cooldownHoverStats -= Time.deltaTime;
+            if(cooldownHoverStats < 0)
             {
                 if(worldCardGrid.selectedCharacter == null)
                 {
-                    canvasGroupPlayer.alpha = 0f;
-                    characterNameTextPlayer.SetText(" ");
+                    canvasGroupStats.alpha = 0f;
+                    characterNameText.SetText(" ");
                 }
                 else
                 {
-                    SetupPlayerStats(worldCardGrid.selectedCharacter.characterData);
-                }
-            }
-        }
-        
-        if (notHoverEnemies && cooldownHoverStatsEnemies >= 0)
-        {
-            cooldownHoverStatsEnemies -= Time.deltaTime;
-            if(cooldownHoverStatsEnemies < 0)
-            {
-                if(worldCardGrid.selectedCharacter == null)
-                {
-                    canvasGroupEnemies.alpha = 0f;
-                    characterNameTextEnemies.SetText(" ");
+                    SetupPlayerStats(worldCardGrid.selectedCharacter, worldCardGrid.selectedCharacter.transform);
                 }
             }
         }
     }
 
-
-    public void SetupPlayerStats(CharacterData data)
+    public void SetupPlayerStats(CharacterCard card, Transform transform)
     {
-        canvasGroupPlayer.alpha = 1f;
-        notHoverPlayer = false;
-        characterNameTextPlayer.SetText(data.CharacterName);
-        healthTextPlayer.SetText(data.maxHealth.ToString());
-        damageTextPlayer.SetText(data.damage.ToString());
-        armorTextPlayer.SetText(data.armor.ToString());
-        agilityTextPlayer.SetText(data.agility.ToString());
-
+        canvasGroupStats.transform.position = new Vector3(transform.position.x + 0.55f, transform.position.y, 0f);
+        canvasGroupStats.alpha = 1f;
+        notHovering = false;
+        characterNameText.SetText(card.characterData.characterName);
+        healthText.SetText(card.currentHealth.ToString());
+        damageText.SetText(card.damage.ToString());
+        armorText.SetText(card.armor.ToString());
+        agilityText.SetText(card.agility.ToString());
     }
 
     public void PlayerCardUnhovered()
     {
-        notHoverPlayer = true;
-        cooldownHoverStatsPlayer = 2f;
-    }
-
-    public void SetupEnemiesStats(CharacterData data)
-    {
-        canvasGroupEnemies.alpha = 1f;
-        notHoverEnemies = false;
-        characterNameTextEnemies.SetText(data.CharacterName);
-        healthTextEnemies.SetText(data.maxHealth.ToString());
-        damageTextEnemies.SetText(data.damage.ToString());
-        armorTextEnemies.SetText(data.armor.ToString());
-        agilityTextEnemies.SetText(data.agility.ToString());
-
-    }
-
-    public void EnemiesCardUnhovered()
-    {
-        notHoverEnemies = true;
-        cooldownHoverStatsEnemies = 2f;
+        notHovering = true;
+        cooldownHoverStats = 2f;
     }
 }

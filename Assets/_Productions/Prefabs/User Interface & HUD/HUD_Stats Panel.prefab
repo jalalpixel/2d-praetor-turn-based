@@ -1288,7 +1288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3912053272912812798}
   m_Layer: 0
-  m_Name: HUD Stats Panel
+  m_Name: HUD_Stats Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

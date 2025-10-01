@@ -166,7 +166,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 74}
   - name: Frame_2
     originalName: 
-    pivot: {x: 0.43548384, y: -0.5357143}
+    pivot: {x: 0.42622948, y: -0.5357143}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -174,7 +174,7 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 62
+      width: 61
       height: 28
     spriteID: d32f7702f4d20554997b875e9ee9ae26
     spriteBone: []
@@ -208,7 +208,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 40}
   - name: Frame_4
     originalName: 
-    pivot: {x: 0.4827586, y: -0.53846157}
+    pivot: {x: 0.47368416, y: -0.53846157}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -216,7 +216,7 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 144
-      width: 58
+      width: 57
       height: 26
     spriteID: e6ad088e89032da428d4d7781fd7732b
     spriteBone: []
@@ -229,16 +229,16 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 144}
   - name: Frame_5
     originalName: 
-    pivot: {x: 0.3958333, y: -0.85}
+    pivot: {x: 0.3958333, y: -0.8947368}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
       x: 76
-      y: 40
+      y: 111
       width: 48
-      height: 20
+      height: 19
     spriteID: 8daf3c3253652e94c9429703c39b59f2
     spriteBone: []
     spriteOutline: []
@@ -247,18 +247,18 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 76, y: 40}
+    uvTransform: {x: 76, y: 111}
   - name: Frame_6
     originalName: 
-    pivot: {x: 0.3863636, y: -0.94736844}
+    pivot: {x: 0.41025642, y: -0.94736844}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 74
+      x: 73
       y: 4
-      width: 44
+      width: 39
       height: 19
     spriteID: eb5554049178b854fab16ad070819732
     spriteBone: []
@@ -268,19 +268,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 74, y: 4}
+    uvTransform: {x: 73, y: 4}
   - name: Frame_7
     originalName: 
-    pivot: {x: 0.43902442, y: -0.625}
+    pivot: {x: 0.41025642, y: -0.65217394}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
       x: 76
-      y: 111
-      width: 41
-      height: 24
+      y: 40
+      width: 39
+      height: 23
     spriteID: f924607a12d64084b900c3d64446154b
     spriteBone: []
     spriteOutline: []
@@ -289,7 +289,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 76, y: 111}
+    uvTransform: {x: 76, y: 40}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -321,9 +321,9 @@ ScriptedImporter:
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 23
+        x: 24
         y: 15
-        width: 62
+        width: 61
         height: 28
       spriteId: d32f7702f4d20554997b875e9ee9ae26
     - name: Frame_3
@@ -339,9 +339,9 @@ ScriptedImporter:
       frameIndex: 4
       additiveSortOrder: 0
       cellRect:
-        x: 22
+        x: 23
         y: 14
-        width: 58
+        width: 57
         height: 26
       spriteId: e6ad088e89032da428d4d7781fd7732b
     - name: Frame_5
@@ -351,25 +351,25 @@ ScriptedImporter:
         x: 31
         y: 17
         width: 48
-        height: 20
+        height: 19
       spriteId: 8daf3c3253652e94c9429703c39b59f2
     - name: Frame_6
       frameIndex: 6
       additiveSortOrder: 0
       cellRect:
-        x: 33
+        x: 34
         y: 18
-        width: 44
+        width: 39
         height: 19
       spriteId: eb5554049178b854fab16ad070819732
     - name: Frame_7
       frameIndex: 7
       additiveSortOrder: 0
       cellRect:
-        x: 32
+        x: 34
         y: 15
-        width: 41
-        height: 24
+        width: 39
+        height: 23
       spriteId: f924607a12d64084b900c3d64446154b
     linkedCells: []
     parentIndex: -1

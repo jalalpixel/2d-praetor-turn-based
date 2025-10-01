@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c42bd330c17fa42b3bc7edc58e6393, type: 3}
   m_Name: Healer
   m_EditorClassIdentifier: 
-  CharacterName: Doctor
+  characterName: Doctor
   classType: 4
   characterAnimator: {fileID: 0}
   maxHealth: 70

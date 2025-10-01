@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 644492789395247079, guid: 5c6d56b60b927384c873c33f1562a0f2, type: 3}
       propertyPath: m_Name
-      value: Buildings
+      value: Buildings_Tent_1
       objectReference: {fileID: 0}
     - target: {fileID: 5361649733028370076, guid: 5c6d56b60b927384c873c33f1562a0f2, type: 3}
       propertyPath: m_LocalPosition.x

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c42bd330c17fa42b3bc7edc58e6393, type: 3}
   m_Name: Ranger
   m_EditorClassIdentifier: 
-  CharacterName: Ranger
+  characterName: Ranger
   classType: 0
   characterAnimator: {fileID: 0}
   maxHealth: 6
