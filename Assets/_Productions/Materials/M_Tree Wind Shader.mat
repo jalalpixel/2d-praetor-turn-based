@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_WindShaderUnlit
-  m_Shader: {fileID: -6465566751694194690, guid: 2cffd1a30c058b74d9842fc231d03f8f, type: 3}
+  m_Name: M_Tree Wind Shader
+  m_Shader: {fileID: 4800000, guid: 986dc4941ecd08943890838d5934fab4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,20 +29,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlendValue: 1
-    - _CallDensity: 10
-    - _ColorMask: 15
-    - _PixelationAmount: 10
-    - _Speed: 1
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    - _UIMaskSoftnessX: 1
-    - _UIMaskSoftnessY: 1
+    - _WindFrequency: 1
+    - _WindSpeed: 0.6
+    - _WindStrength: 0.1
+    - _WindTopOnly: 1
     m_Colors:
-    - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

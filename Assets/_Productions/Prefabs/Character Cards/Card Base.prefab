@@ -353,6 +353,20 @@ MonoBehaviour:
   worldCardGrid: {fileID: 0}
   gridIndex: 0
   characterData: {fileID: 11400000, guid: 4eb9d81ba069fa84d8767a7c67d373db, type: 2}
+  initCharData:
+    characterName: 
+    maxHealth: 0
+    armor: 0
+    agility: 0
+    damage: 0
+    characterAnimator: {fileID: 0}
+  runtimeCharData:
+    characterName: 
+    maxHealth: 0
+    armor: 0
+    agility: 0
+    damage: 0
+    characterAnimator: {fileID: 0}
   frameSpriteRenderer: {fileID: 480705207448083264}
   anim: {fileID: 6019425133574151138}
   damagedPopTextPrefab: {fileID: 4553630536329776194, guid: f93c6c8fb15fff642833133491a1d169, type: 3}
@@ -361,6 +375,9 @@ MonoBehaviour:
   damagedMaterial: {fileID: 2100000, guid: 87ab713526387fb439e5ded07c8d1978, type: 2}
   bloodSplatterPrefab: {fileID: 2865419863021679223, guid: 43abce8d3fe6dbc47a91d1e79be1fb6e, type: 3}
   currentHealth: 0
+  armor: 0
+  agility: 0
+  damage: 0
   cardHead: {fileID: 6636166387325417522}
   isSelected: 0
   isPlayer: 1
