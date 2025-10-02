@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GetComponent<Player>();
+        animator.runtimeAnimatorController = player.characterData.characterAnimator;
 
         if (animator == null)
             animator = GetComponent<Animator>();

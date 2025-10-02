@@ -3,13 +3,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class TroopsMovement : MonoBehaviour
 {
+    [SerializeField] private Troops troops;
+
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float stopRadius = 1.5f; // how close troop can get to player
     private bool facingRight = true;
 
     [Header("References")]
-    [SerializeField] private Transform player;
+    public Transform player;
 
     private Rigidbody2D rb;
     [SerializeField] private Animator anim;
@@ -17,6 +19,7 @@ public class TroopsMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim.runtimeAnimatorController = troops.troopsData.characterAnimator;
 
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player")?.transform;

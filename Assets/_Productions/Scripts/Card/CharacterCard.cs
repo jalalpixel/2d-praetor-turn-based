@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Lean.Pool;
 using System.Collections;
 using UnityEngine.EventSystems;
@@ -26,11 +27,14 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     [HideInInspector]
     public int currentHealth;
 
+    [Header("Stats Variable")]
     // Local copies of stats for easy reference
     public int armor;
     public float agility;
     public int damage;
 
+    [Header("Object Condition Settings")]
+    public Image attackIndicatorFillImage;
     public Transform cardHead;
     public bool isSelected;
     public bool isPlayer = true;
