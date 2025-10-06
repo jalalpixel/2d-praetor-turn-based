@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Spawner
   classType: 1
+  isMeleeTroops: 1
+  attackRange: 0.05
+  attackSpeed: 1
   characterAnimator: {fileID: 0}
   maxHealth: 6
   armor: 3

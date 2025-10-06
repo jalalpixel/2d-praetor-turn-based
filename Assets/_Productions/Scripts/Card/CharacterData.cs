@@ -5,6 +5,10 @@ public class CharacterData : ScriptableObject
 {
     public string characterName;
     public ClassType classType;
+    public bool isMeleeTroops = true;
+    public float attackRange = 0.015f;
+    public float attackSpeed = 1f;
+    
     public enum ClassType
     {
         agility,

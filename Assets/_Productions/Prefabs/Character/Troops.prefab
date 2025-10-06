@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 2665628464596930858}
   - component: {fileID: 6652361400076785550}
   m_Layer: 0
-  m_Name: Miners Body
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -159,7 +159,7 @@ public class CharacterCard : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     private void SetCardStatsHUD()
     {
-        cardStatsHUDManager.SetupPlayerStats(this, this.transform);
+        //cardStatsHUDManager.SetupPlayerStats(this, this.transform);
     }
 
     public void DeselectCard()

@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Doctor
   classType: 4
+  isMeleeTroops: 1
+  attackRange: 0.05
+  attackSpeed: 1
   characterAnimator: {fileID: 0}
   maxHealth: 70
   armor: 1
